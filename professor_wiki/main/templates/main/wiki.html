@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  {% load static %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{wiki.name}} 교수님 - 교수위키</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+  <div class="container">
+
+    <form class="search-form" action="{% url 'redirect_view' %}" method="GET">
+      <input type="text" name="name" placeholder="교수님 이름, 학과 등을 검색하세요" required />
+      <button type="submit">검색</button>
+    </form>
+
+    <header>
+      <h1>{{wiki.name}} 교수</h1>
+      <p class="subtitle">중앙대학교 {{wiki.college}}</p>
+    </header>
+
+    <section class="profile">
+      <img src="professor_kim.jpg" class="professor-photo" />
+      <div class="info-box">
+        <p><strong>대학:</strong>{{wiki.college}}</p>
+        <p><strong>학과(학부):</strong> {{wiki.department}}</p>
+        <p><strong>이메일:</strong>{{wiki.email}}</p>
+        <p><strong>연구실:</strong>{{wiki.office}}</p>
+        <p><strong>담당 과목:</strong>{{wiki.subject}}</p>
+      </div>
+    </section>
+
+    <section class="details">
+      <p>{{wiki.contents|safe}}</p>
+    </section>
+      <form class="search-form" action="{% url 'edit' wiki.name %}" method="GET">
+        <button type="submit">위키 수정하기</button>
+      </form>
+
+    <footer>
+      <p>&copy; 2025 교수위키 | 중앙대학교 심화프로그래밍 1분반 조별 프로젝트</p>
+    </footer>
+  </div>
+</body>
+</html>
